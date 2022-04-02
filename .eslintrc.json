@@ -1,8 +1,8 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
+  "extends": ["plugin:prettier/recommended","next"],
   "rules": {
     "prettier/prettier": [
-      "error",
+      "off",
       {
         "printWidth": 120,
         "tabWidth": 2

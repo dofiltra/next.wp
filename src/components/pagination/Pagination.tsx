@@ -23,7 +23,7 @@ export const Pagination = ({ currentPage, href, totalPages, className }: Paginat
     <nav className={clsx(styles.wrapper, className)}>
       {currentPage !== 1 ? (
         <PaginationLink page={currentPage - 1} className={styles.paginationItem}>
-          <FontAwesomeIcon icon={faChevronLeft} />
+          {/* <FontAwesomeIcon icon={faChevronLeft} /> */}
         </PaginationLink>
       ) : (
         <div />
@@ -59,7 +59,7 @@ export const Pagination = ({ currentPage, href, totalPages, className }: Paginat
       </div>
       {currentPage !== totalPages ? (
         <PaginationLink page={currentPage + 1} className={styles.paginationItem}>
-          <FontAwesomeIcon icon={faChevronRight} />
+          {/* <FontAwesomeIcon icon={faChevronRight} /> */}
         </PaginationLink>
       ) : (
         <div />
