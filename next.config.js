@@ -27,8 +27,8 @@ module.exports = {
   },
   trailingSlash: true,
   i18n: {
-    locales: ["pl"],
-    defaultLocale: "pl"
+    locales: ["en"],
+    defaultLocale: "en"
   },
   images: {
     domains: [process.env.WP_DOMAIN, "secure.gravatar.com"],
