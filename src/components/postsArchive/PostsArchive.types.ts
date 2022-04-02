@@ -1,14 +1,14 @@
-import { Post as PostType } from "api/posts.types";
+import { Post as PostType } from 'api/posts.types'
 
-type Post = PostType & { id: string };
+type Post = PostType & { id: string }
 
 type Pagination = {
-  currentPage: number;
-  totalPages: number;
-  href: string;
-};
+  currentPage: number
+  totalPages: number
+  href: string
+}
 
 export type PostsArchiveProps = {
-  posts: Post[];
-  pagination: Pagination;
-};
+  posts: Post[]
+  pagination: Pagination
+}

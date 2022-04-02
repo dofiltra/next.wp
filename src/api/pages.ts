@@ -1,6 +1,6 @@
-import { AxiosRequestConfig } from "axios";
+import { AxiosRequestConfig } from 'axios'
 
-import graphQL from "./graphql";
+import graphQL from './graphql'
 
 export async function getPageBySlug(slug: string) {
   return graphQL(
@@ -12,10 +12,21 @@ export async function getPageBySlug(slug: string) {
       }
     }`,
     { slug }
-  );
+  )
 }
 
-export async function getPageRevisions(id: number, options?: AxiosRequestConfig): Promise<{data: {page: {revisions: {edges: {node: {databaseId: number, isPreview: boolean}}[]}}}}> {
+export async function getPageRevisions(
+  id: number,
+  options?: AxiosRequestConfig
+): Promise<{
+  data: {
+    page: {
+      revisions: {
+        edges: { node: { databaseId: number; isPreview: boolean } }[]
+      }
+    }
+  }
+}> {
   return graphQL(
     `query PostRevisions($id: ID!) {
       page(id: $id, idType: DATABASE_ID) {
@@ -31,10 +42,20 @@ export async function getPageRevisions(id: number, options?: AxiosRequestConfig)
     }`,
     { id },
     options
-  );
+  )
 }
 
-export async function getPages(page: number, perPage: number): Promise<{ data: { pages: { edges: { node: { title: string, slug: string } }[], pageInfo: { offsetPagination: { total: number }} } } }> {
+export async function getPages(
+  page: number,
+  perPage: number
+): Promise<{
+  data: {
+    pages: {
+      edges: { node: { title: string; slug: string } }[]
+      pageInfo: { offsetPagination: { total: number } }
+    }
+  }
+}> {
   return graphQL(
     `
     query AllPages($size: Int!, $offset: Int!) {
@@ -54,5 +75,5 @@ export async function getPages(page: number, perPage: number): Promise<{ data: {
     }
   `,
     { offset: (page - 1) * perPage, size: perPage }
-  );
+  )
 }

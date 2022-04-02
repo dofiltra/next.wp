@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react'
 
 export type PageLinkProps = {
-  href: string;
-  page: number;
-  children: ReactNode;
-  className?: string;
-};
+  href: string
+  page: number
+  children: ReactNode
+  className?: string
+}

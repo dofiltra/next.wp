@@ -1,4 +1,4 @@
 export type CategoryProps = {
-  name: string;
-  slug: string;
-};
+  name: string
+  slug: string
+}

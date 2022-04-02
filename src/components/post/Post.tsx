@@ -1,16 +1,16 @@
-import { Fragment } from "react";
-import format from "date-fns/format";
-import parseISO from "date-fns/parseISO";
-import { Element } from "domhandler/lib/node";
-import parseHTML, { HTMLReactParserOptions } from "html-react-parser";
-import Link from "next/link";
-import { pl } from "date-fns/locale";
+import { Element } from 'domhandler/lib/node'
+import { Fragment } from 'react'
+import { pl } from 'date-fns/locale'
+import Link from 'next/link'
+import format from 'date-fns/format'
+import parseHTML, { HTMLReactParserOptions } from 'html-react-parser'
+import parseISO from 'date-fns/parseISO'
 
-import { Avatar } from "./avatar/Avatar";
-import { Category } from "./category/Category";
+import { Avatar } from './avatar/Avatar'
+import { Category } from './category/Category'
 
-import { PostProps } from "./Post.types";
-import styles from "./Post.module.scss";
+import { PostProps } from './Post.types'
+import styles from './Post.module.scss'
 
 export const Post = ({
   post: {
@@ -23,20 +23,20 @@ export const Post = ({
   },
   isExcerpt,
 }: PostProps) => {
-  const currentPostHref = `/${format(parseISO(date), "yyyy/MM/dd")}/${slug}/`;
+  const currentPostHref = `/${format(parseISO(date), 'yyyy/MM/dd')}/${slug}/`
   const options: HTMLReactParserOptions = {
     replace: (domNode) => {
-      if (domNode instanceof Element && domNode.attribs.class === "read-more") {
+      if (domNode instanceof Element && domNode.attribs.class === 'read-more') {
         return (
           <div className={styles.readMore}>
             <Link href={currentPostHref}>
               <a>Czytaj dalej</a>
             </Link>
           </div>
-        );
+        )
       }
     },
-  };
+  }
 
   return (
     <article className={styles.wrapper}>
@@ -45,7 +45,7 @@ export const Post = ({
           {categories.map(({ node }, index) => (
             <Fragment key={node.slug}>
               <Category {...node} />
-              {index !== categories.length - 1 && ", "}
+              {index !== categories.length - 1 && ', '}
             </Fragment>
           ))}
         </div>
@@ -58,12 +58,14 @@ export const Post = ({
         ) : (
           <h1 className={styles.title}>{title}</h1>
         )}
-        <span className={styles.date}>{format(parseISO(date), "do MMMM yyyy", { locale: pl })}</span>
+        <span className={styles.date}>
+          {format(parseISO(date), 'do MMMM yyyy', { locale: pl })}
+        </span>
       </header>
       <div className={styles.content}>{parseHTML(content, options)}</div>
       <footer className={styles.footer}>
         <Avatar {...author} />
       </footer>
     </article>
-  );
-};
+  )
+}

@@ -1,6 +1,8 @@
-import graphQL from "./graphql";
+import graphQL from './graphql'
 
-export async function getAllTags(first: number): Promise<{ data: { tags: { edges: { node: { slug: string } }[] } } }> {
+export async function getAllTags(
+  first: number
+): Promise<{ data: { tags: { edges: { node: { slug: string } }[] } } }> {
   return graphQL(
     `
     query GetAllTags($first: Int!) {
@@ -14,5 +16,5 @@ export async function getAllTags(first: number): Promise<{ data: { tags: { edges
     }
   `,
     { first }
-  );
+  )
 }

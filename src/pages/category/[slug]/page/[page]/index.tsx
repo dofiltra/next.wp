@@ -1,15 +1,15 @@
-import { GetStaticProps } from "next";
-import Head from "next/head";
-import { ParsedUrlQuery } from "querystring";
+import { GetStaticProps } from 'next'
+import { ParsedUrlQuery } from 'querystring'
+import Head from 'next/head'
 
-import { getPostsByCategory } from "api/posts";
-import { PostsArchive } from "components/postsArchive/PostsArchive";
-import { PostsArchiveProps } from "components/postsArchive/PostsArchive.types";
-import { POSTS_PER_PAGE } from "utils/constants";
+import { POSTS_PER_PAGE } from 'utils/constants'
+import { PostsArchive } from 'components/postsArchive/PostsArchive'
+import { PostsArchiveProps } from 'components/postsArchive/PostsArchive.types'
+import { getPostsByCategory } from 'api/posts'
 
 export type CategoryArchiveProps = PostsArchiveProps & {
-  category: string;
-};
+  category: string
+}
 
 const CategoryArchive = ({ category, ...props }: CategoryArchiveProps) => (
   <>
@@ -18,24 +18,27 @@ const CategoryArchive = ({ category, ...props }: CategoryArchiveProps) => (
     </Head>
     <PostsArchive {...props} />
   </>
-);
+)
 
-export default CategoryArchive;
+export default CategoryArchive
 
-export const getStaticPaths = async () => ({ paths: [], fallback: "blocking" });
+export const getStaticPaths = async () => ({ paths: [], fallback: 'blocking' })
 
 interface Params extends ParsedUrlQuery {
-  slug: string;
-  page: string;
+  slug: string
+  page: string
 }
 
-export const getStaticProps: GetStaticProps<CategoryArchiveProps, Params> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<
+  CategoryArchiveProps,
+  Params
+> = async ({ params }) => {
   if (!params || !params.page || !params.slug) {
-    return { notFound: true };
+    return { notFound: true }
   }
 
-  const page = parseInt(params.page);
-  const slug = params.slug;
+  const page = parseInt(params.page)
+  const slug = params.slug
 
   const {
     data: {
@@ -47,8 +50,8 @@ export const getStaticProps: GetStaticProps<CategoryArchiveProps, Params> = asyn
         },
       },
     },
-  } = await getPostsByCategory(slug, page, POSTS_PER_PAGE);
-  const totalPages = Math.ceil(total / POSTS_PER_PAGE);
+  } = await getPostsByCategory(slug, page, POSTS_PER_PAGE)
+  const totalPages = Math.ceil(total / POSTS_PER_PAGE)
 
   return edges.length > 0
     ? {
@@ -62,5 +65,5 @@ export const getStaticProps: GetStaticProps<CategoryArchiveProps, Params> = asyn
           },
         },
       }
-    : { notFound: true };
-};
+    : { notFound: true }
+}

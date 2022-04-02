@@ -1,22 +1,31 @@
-import { GetStaticPaths, GetStaticPropsContext, GetStaticPropsResult } from "next";
+import {
+  GetStaticPaths,
+  GetStaticPropsContext,
+  GetStaticPropsResult,
+} from 'next'
 
-import { getPosts } from "api/posts";
-import { PostsArchive as ArchivesPage } from "components/postsArchive/PostsArchive";
-import { PostsArchiveProps } from "components/postsArchive/PostsArchive.types";
-import { POSTS_PER_PAGE } from "utils/constants";
+import { PostsArchive as ArchivesPage } from 'components/postsArchive/PostsArchive'
+import { POSTS_PER_PAGE } from 'utils/constants'
+import { PostsArchiveProps } from 'components/postsArchive/PostsArchive.types'
+import { getPosts } from 'api/posts'
 
-export default ArchivesPage;
+export default ArchivesPage
 
-export const getStaticPaths: GetStaticPaths = async () => ({ paths: [], fallback: "blocking" });
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [],
+  fallback: 'blocking',
+})
 
 export const getStaticProps = async ({
   params,
-}: GetStaticPropsContext<{ page: string }>): Promise<GetStaticPropsResult<PostsArchiveProps>> => {
+}: GetStaticPropsContext<{ page: string }>): Promise<
+  GetStaticPropsResult<PostsArchiveProps>
+> => {
   if (!params || !params.page) {
-    return { notFound: true };
+    return { notFound: true }
   }
 
-  const page = parseInt(params.page);
+  const page = parseInt(params.page)
   const {
     data: {
       posts: {
@@ -26,15 +35,15 @@ export const getStaticProps = async ({
         },
       },
     },
-  } = await getPosts(page, POSTS_PER_PAGE);
-  const totalPages = Math.ceil(total / POSTS_PER_PAGE);
+  } = await getPosts(page, POSTS_PER_PAGE)
+  const totalPages = Math.ceil(total / POSTS_PER_PAGE)
 
   return edges.length > 0
     ? {
         props: {
           posts: edges.map(({ node }) => node),
-          pagination: { currentPage: page, totalPages, href: "/" },
+          pagination: { currentPage: page, totalPages, href: '/' },
         },
       }
-    : { notFound: true };
-};
+    : { notFound: true }
+}

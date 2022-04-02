@@ -1,15 +1,15 @@
-import { GetStaticProps } from "next";
-import Head from "next/head";
-import { ParsedUrlQuery } from "querystring";
+import { GetStaticProps } from 'next'
+import { ParsedUrlQuery } from 'querystring'
+import Head from 'next/head'
 
-import { getPostsByTag } from "api/posts";
-import { PostsArchive } from "components/postsArchive/PostsArchive";
-import { PostsArchiveProps } from "components/postsArchive/PostsArchive.types";
-import { POSTS_PER_PAGE } from "utils/constants";
+import { POSTS_PER_PAGE } from 'utils/constants'
+import { PostsArchive } from 'components/postsArchive/PostsArchive'
+import { PostsArchiveProps } from 'components/postsArchive/PostsArchive.types'
+import { getPostsByTag } from 'api/posts'
 
 export type TagArchiveProps = PostsArchiveProps & {
-  tag: string;
-};
+  tag: string
+}
 
 const TagArchive = ({ tag, ...props }: TagArchiveProps) => (
   <>
@@ -18,24 +18,26 @@ const TagArchive = ({ tag, ...props }: TagArchiveProps) => (
     </Head>
     <PostsArchive {...props} />
   </>
-);
+)
 
-export default TagArchive;
+export default TagArchive
 
-export const getStaticPaths = async () => ({ paths: [], fallback: "blocking" });
+export const getStaticPaths = async () => ({ paths: [], fallback: 'blocking' })
 
 interface Params extends ParsedUrlQuery {
-  slug: string;
-  page: string;
+  slug: string
+  page: string
 }
 
-export const getStaticProps: GetStaticProps<TagArchiveProps, Params> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<TagArchiveProps, Params> = async ({
+  params,
+}) => {
   if (!params || !params.page || !params.slug) {
-    return { notFound: true };
+    return { notFound: true }
   }
 
-  const page = parseInt(params.page);
-  const slug = params.slug;
+  const page = parseInt(params.page)
+  const slug = params.slug
 
   const {
     data: {
@@ -47,8 +49,8 @@ export const getStaticProps: GetStaticProps<TagArchiveProps, Params> = async ({ 
         },
       },
     },
-  } = await getPostsByTag(slug, page, POSTS_PER_PAGE);
-  const totalPages = Math.ceil(total / POSTS_PER_PAGE);
+  } = await getPostsByTag(slug, page, POSTS_PER_PAGE)
+  const totalPages = Math.ceil(total / POSTS_PER_PAGE)
 
   return edges.length > 0
     ? {
@@ -62,5 +64,5 @@ export const getStaticProps: GetStaticProps<TagArchiveProps, Params> = async ({ 
           },
         },
       }
-    : { notFound: true };
-};
+    : { notFound: true }
+}

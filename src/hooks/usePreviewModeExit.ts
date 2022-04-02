@@ -1,8 +1,8 @@
-import axios from "axios";
-import { useEffect } from "react";
+import { useEffect } from 'react'
+import axios from 'axios'
 
 export const usePreviewModeExit = () => {
   useEffect(() => {
-    axios.post("/api/exit-preview")
+    void axios.post('/api/exit-preview')
   }, [])
 }

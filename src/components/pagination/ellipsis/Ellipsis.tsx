@@ -1,3 +1,3 @@
-import styles from "./Ellipsis.module.scss";
+import styles from './Ellipsis.module.scss'
 
-export const Ellipsis = () => <span className={styles.ellipsis}>...</span>;
+export const Ellipsis = () => <span className={styles.ellipsis}>...</span>

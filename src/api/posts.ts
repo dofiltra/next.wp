@@ -1,9 +1,13 @@
-import { AxiosRequestConfig } from "axios";
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable require-await */
+import { AxiosRequestConfig } from 'axios'
 
-import graphQL from "./graphql";
-import { Post } from "./posts.types";
+import { Post } from './posts.types'
+import graphQL from './graphql'
 
-export async function getPostBySlug(slug: string): Promise<{data: {post: Post}}> {
+export async function getPostBySlug(
+  slug: string
+): Promise<{ data: { post: Post } }> {
   return graphQL(
     `query PostBySlug($slug: ID!) {
       post(id: $slug, idType: SLUG) {
@@ -40,10 +44,21 @@ export async function getPostBySlug(slug: string): Promise<{data: {post: Post}}>
       }
     }`,
     { slug }
-  );
+  )
 }
 
-export async function getPostRevisions(id: number, options?: AxiosRequestConfig): Promise<{data: {post: {revisions: {edges: {node: {databaseId: number, isPreview: boolean}}[]}}}}> {
+export async function getPostRevisions(
+  id: number,
+  options?: AxiosRequestConfig
+): Promise<{
+  data: {
+    post: {
+      revisions: {
+        edges: { node: { databaseId: number; isPreview: boolean } }[]
+      }
+    }
+  }
+}> {
   return graphQL(
     `query PostRevisions($id: ID!) {
       post(id: $id, idType: DATABASE_ID) {
@@ -59,10 +74,13 @@ export async function getPostRevisions(id: number, options?: AxiosRequestConfig)
     }`,
     { id },
     options
-  );
+  )
 }
 
-export async function getPostById(id: number, options?: AxiosRequestConfig): Promise<{data: {post: Post}}> {
+export async function getPostById(
+  id: number,
+  options?: AxiosRequestConfig
+): Promise<{ data: { post: Post } }> {
   return graphQL(
     `query PostById($id: ID!) {
       post(id: $id, idType: DATABASE_ID) {
@@ -100,19 +118,22 @@ export async function getPostById(id: number, options?: AxiosRequestConfig): Pro
     }`,
     { id },
     options
-  );
+  )
 }
 
 type PostsResponse<T extends object = {}> = {
   data: {
     posts: {
-      edges: { node: Post }[],
-      pageInfo: { offsetPagination: { total: number }}
+      edges: { node: Post }[]
+      pageInfo: { offsetPagination: { total: number } }
     }
   } & T
 }
 
-export async function getPosts(page: number, perPage: number): Promise<PostsResponse> {
+export async function getPosts(
+  page: number,
+  perPage: number
+): Promise<PostsResponse> {
   return graphQL(
     `
     query AllPosts($size: Int!, $offset: Int!) {
@@ -160,10 +181,14 @@ export async function getPosts(page: number, perPage: number): Promise<PostsResp
     }
   `,
     { offset: (page - 1) * perPage, size: perPage }
-  );
+  )
 }
 
-export async function getPostsByTag(tag: string, page: number, perPage: number): Promise<PostsResponse<{ tag: { name: string } }>> {
+export async function getPostsByTag(
+  tag: string,
+  page: number,
+  perPage: number
+): Promise<PostsResponse<{ tag: { name: string } }>> {
   return graphQL(
     `
     query PostsByTag($tagID: ID!, $tag: String!, $size: Int!, $offset: Int!) {
@@ -214,12 +239,14 @@ export async function getPostsByTag(tag: string, page: number, perPage: number):
     }
   `,
     { tagID: tag, tag, offset: (page - 1) * perPage, size: perPage }
-  );
+  )
 }
 
-
-
-export async function getPostsByCategory(category: string, page: number, perPage: number): Promise<PostsResponse<{ category: { name: string } }>> {
+export async function getPostsByCategory(
+  category: string,
+  page: number,
+  perPage: number
+): Promise<PostsResponse<{ category: { name: string } }>> {
   return graphQL(
     `
     query PostsByCategory($categoryID: ID!, $categoryName: String!, $size: Int!, $offset: Int!) {
@@ -275,10 +302,14 @@ export async function getPostsByCategory(category: string, page: number, perPage
       offset: (page - 1) * perPage,
       size: perPage,
     }
-  );
+  )
 }
 
-export async function getPostsByAuthor(author: string, page: number, perPage: number): Promise<PostsResponse<{ user: { name: string } }>> {
+export async function getPostsByAuthor(
+  author: string,
+  page: number,
+  perPage: number
+): Promise<PostsResponse<{ user: { name: string } }>> {
   return graphQL(
     `
     query PostsByAuthor($authorID: ID!, $authorName: String!, $size: Int!, $offset: Int!) {
@@ -334,5 +365,5 @@ export async function getPostsByAuthor(author: string, page: number, perPage: nu
       offset: (page - 1) * perPage,
       size: perPage,
     }
-  );
+  )
 }

@@ -5,5 +5,7 @@ function md5(text: string): string {
 }
 
 export function authorizationCookieName() {
-  return `wordpress_logged_in_${md5(`${process.env.WP_PROTOCOL}://${process.env.WP_DOMAIN}`)}`;
+  return `wordpress_logged_in_${md5(
+    `${process.env.WP_PROTOCOL}://${process.env.WP_DOMAIN}`
+  )}`
 }

@@ -1,6 +1,9 @@
-import graphQL from "./graphql";
+/* eslint-disable require-await */
+import graphQL from './graphql'
 
-export async function getAllCategories(first: number): Promise<{ data: { categories: { edges: { node: { slug: string } }[] } } }> {
+export async function getAllCategories(
+  first: number
+): Promise<{ data: { categories: { edges: { node: { slug: string } }[] } } }> {
   return graphQL(
     `
     query GetAllCategories($first: Int!) {
@@ -14,5 +17,5 @@ export async function getAllCategories(first: number): Promise<{ data: { categor
     }
   `,
     { first }
-  );
+  )
 }
