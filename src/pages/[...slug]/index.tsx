@@ -164,11 +164,14 @@ async function getAllPosts(): Promise<{ slug: string }[]> {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const pages = (await getAllPages()) || []
+  //const pages = (await getAllPages()) || []
   const posts = (await getAllPosts()) || []
 
   return {
-    paths: [...pages, ...posts].map(({ slug }) => ({
+    paths: [
+      //...pages,
+      ...posts,
+    ].map(({ slug }) => ({
       params: { slug: slug.split('/') },
     })),
     fallback: false,

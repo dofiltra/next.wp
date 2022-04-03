@@ -42,6 +42,7 @@ export const Pagination = ({
           page={currentPage - 1}
           className={styles.paginationItem}
         >
+          {'<<<'}
           {/* <FontAwesomeIcon icon={faChevronLeft} /> */}
         </PaginationLink>
       ) : (
@@ -85,6 +86,7 @@ export const Pagination = ({
           page={currentPage + 1}
           className={styles.paginationItem}
         >
+          {'>>>'}
           {/* <FontAwesomeIcon icon={faChevronRight} /> */}
         </PaginationLink>
       ) : (

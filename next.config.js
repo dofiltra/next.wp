@@ -26,10 +26,10 @@ module.exports = {
     ];
   },
   trailingSlash: true,
-  i18n: {
-    locales: ["en"],
-    defaultLocale: "en"
-  },
+  // i18n: {
+  //   locales: ["pl"],
+  //   defaultLocale: "pl"
+  // },
   images: {
     domains: [process.env.WP_DOMAIN, "secure.gravatar.com"],
   },
