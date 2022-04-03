@@ -8,7 +8,9 @@
     "lint": "yarn pretty && eslint --max-warnings 0 --ext ts,tsx,json src --fix && next lint",
     "prepare": "husky install",
     "test": "next lint && tsc",
-    "pretty": "prettier --write src && prettier --check src "
+    "pretty": "prettier --write src && prettier --check src ",
+    "update": "yarn build && git add . && git commit -m 'update' && git push",
+    "upg": "yarn upgrade --latest && yarn run build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
@@ -29,8 +31,9 @@
     "@types/cookies": "^0.7.7",
     "@types/node": "16.11.9",
     "@types/react": "17.0.35",
-    "@typescript-eslint/eslint-plugin": "^5.17.0",
-    "@typescript-eslint/parser": "^5.17.0",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "autoprefixer": "^10.4.2",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.4",
     "eslint-config-prettier": "^8.3.0",
@@ -39,6 +42,8 @@
     "eslint-plugin-valtio": "^0.4.2",
     "husky": "^7.0.4",
     "prettier": "^2.4.1",
+    "tailwindcss": "^3.0.23",
+    "tailwindcss-classnames": "^3.0.3",
     "typescript": "4.5.2"
   }
 }
