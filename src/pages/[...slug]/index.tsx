@@ -12,7 +12,7 @@ import parseHTML, {
 import { MAX_PAGINATION_SIZE } from 'utils/constants'
 import { Post } from 'api/posts.types'
 import { getPageBySlug, getPages } from 'api/pages'
-import { getPostById } from 'api/posts'
+import { getPostById, getPostBySlug, getPosts } from 'api/posts'
 import { usePreviewModeExit } from 'hooks/usePreviewModeExit'
 
 import styles from './Page.module.scss'
@@ -95,15 +95,25 @@ export const getStaticProps: GetStaticProps<
     return { props: page }
   }
 
-  if (!ctx.params || !ctx.params.slug) {
+  const slug = ctx.params?.slug?.join('/')
+
+  if (!slug) {
     return { notFound: true }
   }
 
   const {
-    data: { pageBy: props },
-  } = await getPageBySlug(ctx.params.slug.join('/'))
+    data: { pageBy },
+  } = await getPageBySlug(slug)
 
-  return { props }
+  if (pageBy) {
+    return { props: pageBy }
+  }
+
+  const {
+    data: { post },
+  } = await getPostBySlug(slug)
+
+  return { props: post }
 }
 
 async function getAllPages(): Promise<{ slug: string }[]> {
@@ -121,6 +131,7 @@ async function getAllPages(): Promise<{ slug: string }[]> {
         },
       },
     } = await getPages(page, MAX_PAGINATION_SIZE)
+
     const totalPages = Math.ceil(total / MAX_PAGINATION_SIZE)
     const posts = [
       ...(await acc),
@@ -133,12 +144,42 @@ async function getAllPages(): Promise<{ slug: string }[]> {
   return getAllPagesWithAcc(1, Promise.resolve([]))
 }
 
+async function getAllPosts(): Promise<{ slug: string }[]> {
+  async function getAllPagesWithAcc(
+    pageNum: number,
+    acc: Promise<{ slug: string }[]>
+  ): Promise<{ slug: string }[]> {
+    const {
+      data: {
+        posts: {
+          edges,
+          pageInfo: {
+            offsetPagination: { total },
+          },
+        },
+      },
+    } = await getPosts(pageNum, MAX_PAGINATION_SIZE)
+
+    const totalPages = Math.ceil(total / MAX_PAGINATION_SIZE)
+    const posts = [
+      ...(await acc),
+      ...edges.map(({ node: { slug } }) => ({ slug })),
+    ]
+    return pageNum === totalPages
+      ? posts
+      : getAllPagesWithAcc(pageNum + 1, Promise.resolve(posts))
+  }
+  return getAllPagesWithAcc(1, Promise.resolve([]))
+}
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const pages = (await getAllPages()) || []
+  const posts = (await getAllPosts()) || []
 
   return {
-    paths:
-      pages?.map(({ slug }) => ({ params: { slug: slug.split('/') } })) || [],
+    paths: [...pages, ...posts].map(({ slug }) => ({
+      params: { slug: slug.split('/') },
+    })),
     fallback: false,
   }
 }
