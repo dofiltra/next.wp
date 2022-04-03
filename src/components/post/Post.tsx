@@ -62,7 +62,13 @@ export const Post = ({
           {format(parseISO(date), 'do MMMM yyyy', { locale: enUS })}
         </span>
       </header>
-      <div className={styles.content}>{parseHTML(content, options)}</div>
+      <div className="container">
+        <div className="row">
+          <div className={`col ${styles.content}`}>
+            {parseHTML(content, options)}
+          </div>
+        </div>
+      </div>
       <footer className={styles.footer}>
         <Avatar {...author} />
       </footer>
