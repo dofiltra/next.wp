@@ -3,10 +3,9 @@ import format from 'date-fns/format'
 import parseISO from 'date-fns/parseISO'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+import { authorizationCookieName } from 'utils/wordpress'
 import { getPageRevisions } from 'api/pages'
 import { getPostById, getPostRevisions } from 'api/posts'
-
-import { authorizationCookieName } from 'utils/wordpress'
 
 enum PreviewType {
   Post = 'post',
