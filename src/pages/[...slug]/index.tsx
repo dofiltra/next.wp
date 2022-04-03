@@ -95,7 +95,7 @@ export const getStaticProps: GetStaticProps<
     return { props: page }
   }
 
-  const slug = ctx.params?.slug?.join('/')
+  const slug = ctx.params?.slug?.join('/') || ''
 
   if (!slug) {
     return { notFound: true }

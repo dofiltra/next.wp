@@ -23,7 +23,7 @@ export const Post = ({
   },
   isExcerpt,
 }: PostProps) => {
-  const currentPostHref = `/${format(parseISO(date), 'yyyy/MM/dd')}/${slug}/`
+  const currentPostHref = `/${slug}/`
   const options: HTMLReactParserOptions = {
     replace: (domNode) => {
       if (domNode instanceof Element && domNode.attribs.class === 'read-more') {
