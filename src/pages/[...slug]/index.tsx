@@ -1,21 +1,17 @@
 /* eslint-disable require-await */
 import { Element } from 'domhandler/lib/node'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { HTMLReactParserOptions, domToReact } from 'html-react-parser'
 import { ParsedUrlQuery } from 'querystring'
 import Head from 'next/head'
 import Image from 'next/image'
-import parseHTML, {
-  HTMLReactParserOptions,
-  domToReact,
-} from 'html-react-parser'
 
 import { MAX_PAGINATION_SIZE } from 'utils/constants'
 import { Post } from 'api/posts.types'
+import { Post as PostPage } from 'components/post/Post'
 import { getPageBySlug, getPages } from 'api/pages'
 import { getPostById, getPostBySlug, getPosts } from 'api/posts'
 import { usePreviewModeExit } from 'hooks/usePreviewModeExit'
-
-import styles from './Page.module.scss'
 
 type PageProps = Pick<Post, 'title' | 'slug' | 'content'>
 
@@ -59,12 +55,7 @@ const Page = (page: PageProps) => {
       <Head>
         <title>{page.title}</title>
       </Head>
-      <article>
-        <header className={styles.header}>
-          <h1 className={styles.title}>{page.title}</h1>
-        </header>
-        <div className={styles.content}>{parseHTML(page.content, options)}</div>
-      </article>
+      <PostPage post={page as Post} isExcerpt={false} />
     </>
   )
 }
