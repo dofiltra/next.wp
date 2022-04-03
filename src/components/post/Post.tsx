@@ -1,6 +1,6 @@
 import { Element } from 'domhandler/lib/node'
 import { Fragment } from 'react'
-import { pl } from 'date-fns/locale'
+import { enUS } from 'date-fns/locale'
 import Link from 'next/link'
 import format from 'date-fns/format'
 import parseHTML, { HTMLReactParserOptions } from 'html-react-parser'
@@ -30,7 +30,7 @@ export const Post = ({
         return (
           <div className={styles.readMore}>
             <Link href={currentPostHref}>
-              <a>Czytaj dalej</a>
+              <a>{'>>>'}</a>
             </Link>
           </div>
         )
@@ -59,7 +59,7 @@ export const Post = ({
           <h1 className={styles.title}>{title}</h1>
         )}
         <span className={styles.date}>
-          {format(parseISO(date), 'do MMMM yyyy', { locale: pl })}
+          {format(parseISO(date), 'do MMMM yyyy', { locale: enUS })}
         </span>
       </header>
       <div className={styles.content}>{parseHTML(content, options)}</div>

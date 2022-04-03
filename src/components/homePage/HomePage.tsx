@@ -5,19 +5,23 @@ import { HomePageProps } from './HomePage.types'
 import { getExcerptFromContent } from './HomePage.utils'
 import styles from './HomePage.module.scss'
 
-export const HomePage = ({ posts, pagination }: HomePageProps) => (
-  <div>
+export const HomePage = ({ posts, pagination }: HomePageProps) => {
+  // console.log(posts)
+
+  return (
     <div>
-      {posts.map(({ content, ...post }) => (
-        <Post
-          key={post.id}
-          post={{ ...post, content: getExcerptFromContent(content) }}
-          isExcerpt
-        />
-      ))}
+      <div>
+        {posts.map(({ content, ...post }) => (
+          <Post
+            key={post.id}
+            post={{ ...post, content: getExcerptFromContent(content) }}
+            isExcerpt
+          />
+        ))}
+      </div>
+      {pagination.totalPages > 1 && (
+        <Pagination {...pagination} className={styles.pagination} />
+      )}
     </div>
-    {pagination.totalPages > 1 && (
-      <Pagination {...pagination} className={styles.pagination} />
-    )}
-  </div>
-)
+  )
+}

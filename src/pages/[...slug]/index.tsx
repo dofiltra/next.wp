@@ -1,4 +1,3 @@
-/* eslint-disable require-await */
 import { Element } from 'domhandler/lib/node'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { ParsedUrlQuery } from 'querystring'
