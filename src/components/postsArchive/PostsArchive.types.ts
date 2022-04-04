@@ -11,4 +11,6 @@ type Pagination = {
 export type PostsArchiveProps = {
   posts: Post[]
   pagination: Pagination
+  sitename?: string
+  siteDescription?: string
 }

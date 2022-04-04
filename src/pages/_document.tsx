@@ -1,4 +1,5 @@
-import { Navbar } from 'components/navbar/Section'
+/* eslint-disable require-await */
+/* eslint-disable @typescript-eslint/ban-types */
 import Document, {
   DocumentContext,
   Head,
@@ -28,7 +29,6 @@ class MyDocument extends Document {
         <body>
           <div className="container">
             <div className="row">
-              <Navbar />
               <Main />
             </div>
           </div>

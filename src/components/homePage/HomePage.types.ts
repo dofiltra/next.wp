@@ -11,4 +11,5 @@ type Pagination = {
 export type HomePageProps = {
   posts: Post[]
   pagination: Pagination
+  sitename?: string
 }

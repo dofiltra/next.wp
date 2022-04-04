@@ -1,3 +1,4 @@
+/* eslint-disable require-await */
 import { AxiosRequestConfig } from 'axios'
 
 import graphQL from './graphql'

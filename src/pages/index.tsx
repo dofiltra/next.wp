@@ -7,5 +7,9 @@ import { getStaticProps as getPostsArchiveStaticProps } from 'pages/page/[page]'
 
 export default HomePage
 
-export const getStaticProps = async (ctx: GetStaticPropsContext<{}>) =>
-  getPostsArchiveStaticProps({ ...ctx, params: { page: '1', ...ctx.params } })
+export const getStaticProps = async (ctx: GetStaticPropsContext<{}>) => {
+  return getPostsArchiveStaticProps({
+    ...ctx,
+    params: { page: '1', ...ctx.params },
+  })
+}
