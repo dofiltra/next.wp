@@ -1,14 +1,9 @@
 /* eslint-disable require-await */
 /* eslint-disable no-empty-pattern */
-import { NavbarProps } from './Section.types'
+import { NavbarProps } from './Navbar.types'
 // import styles from './Section.module.scss'
 
-// const { SITENAME } = process.env
-
 export const Navbar = ({ sitename }: NavbarProps) => {
-  // const opts = await getGeneralSettings()
-  // console.log(opts)
-
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -29,7 +24,7 @@ export const Navbar = ({ sitename }: NavbarProps) => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
+              <a className="nav-link active" aria-current="page" href="/">
                 Home
               </a>
             </li>

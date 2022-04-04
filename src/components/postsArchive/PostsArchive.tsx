@@ -6,7 +6,7 @@ import { getExcerptFromContent } from './PostsArchive.utils'
 import styles from './PostsArchive.module.scss'
 
 export const PostsArchive = ({ posts, pagination }: PostsArchiveProps) => (
-  <div>
+  <div className="container">
     <div>
       {posts.map(({ content, ...post }) => (
         <Post

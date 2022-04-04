@@ -1,5 +1,6 @@
 /* eslint-disable require-await */
 /* eslint-disable @typescript-eslint/ban-types */
+import { Navbar } from 'components/navbar/Navbar'
 import Document, {
   DocumentContext,
   Head,
@@ -16,6 +17,8 @@ class MyDocument extends Document {
   }
 
   render() {
+    const { sitename = '' } = { ...this.props?.__NEXT_DATA__?.props?.pageProps }
+
     return (
       <Html>
         <Head>
@@ -28,6 +31,9 @@ class MyDocument extends Document {
         </Head>
         <body>
           <div className="container">
+            <div className="row">
+              <Navbar sitename={sitename} />
+            </div>
             <div className="row">
               <Main />
             </div>

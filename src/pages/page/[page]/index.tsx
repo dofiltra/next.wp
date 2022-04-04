@@ -20,7 +20,7 @@ export const getStaticPaths: GetStaticPaths = async () => ({
 
 export const getStaticProps = async ({
   params,
-}: GetStaticPropsContext<{ page: string; sitename?: string }>): Promise<
+}: GetStaticPropsContext<{ page: string }>): Promise<
   GetStaticPropsResult<PostsArchiveProps>
 > => {
   if (!params?.page) {
