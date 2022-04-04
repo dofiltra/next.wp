@@ -17,7 +17,11 @@ class MyDocument extends Document {
   }
 
   render() {
-    const { sitename = '' } = { ...this.props?.__NEXT_DATA__?.props?.pageProps }
+    const { sitename = '', categories = [] } = {
+      ...this.props?.__NEXT_DATA__?.props?.pageProps,
+    }
+
+    console.log(categories?.edges || [])
 
     return (
       <Html>
@@ -32,7 +36,11 @@ class MyDocument extends Document {
         <body>
           <div className="container">
             <div className="row">
-              <Navbar sitename={sitename} />
+              <Navbar
+                sitename={sitename}
+                categoriesMenuText={'Categories'}
+                categories={categories}
+              />
             </div>
             <div className="row">
               <Main />

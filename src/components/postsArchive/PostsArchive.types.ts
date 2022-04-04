@@ -1,3 +1,4 @@
+import { NavbarProps } from 'components/navbar/Navbar.types'
 import { Post as PostType } from 'api/posts.types'
 
 type Post = PostType & { id: string }
@@ -11,6 +12,4 @@ type Pagination = {
 export type PostsArchiveProps = {
   posts: Post[]
   pagination: Pagination
-  sitename?: string
-  siteDescription?: string
-}
+} & NavbarProps

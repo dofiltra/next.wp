@@ -53,6 +53,7 @@ export const getStaticProps = async ({
           pagination: { currentPage: page, totalPages, href: '/' },
           sitename: title,
           siteDescription: description,
+          // categories: [],
         },
       }
     : { notFound: true }

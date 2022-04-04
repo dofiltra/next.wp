@@ -3,7 +3,16 @@
 import { NavbarProps } from './Navbar.types'
 // import styles from './Section.module.scss'
 
-export const Navbar = ({ sitename }: NavbarProps) => {
+export const Navbar = ({
+  sitename,
+  categoriesMenuText,
+  categories,
+}: NavbarProps) => {
+  console.log(
+    'cat',
+    categories?.edges?.map((e) => e.node)
+  )
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -23,23 +32,31 @@ export const Navbar = ({ sitename }: NavbarProps) => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/">
-                Home
+            {/* <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {categoriesMenuText}
               </a>
-            </li>
-            {/* <li className="nav-item">
-              <a className="nav-link" href="#">
-                Features
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Pricing
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link disabled">Disabled</a>
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                {categories?.edges
+                  ?.map((e) => e.node)
+                  ?.map((cat) => (
+                    <li>
+                      <a
+                        className="dropdown-item"
+                        href={`/category/${cat.slug}`}
+                      >
+                        {cat.name}
+                      </a>
+                    </li>
+                  ))}
+              </ul>
             </li> */}
           </ul>
         </div>
